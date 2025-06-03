@@ -227,7 +227,6 @@ def Change_Cycle(Date,cycle_duration,KBar_dic,product_name):
     
     KBar_obj = KBar(Date, cycle=cycle_duration)
 ###### 進行 K 棒更新
-    KBar = indicator_forKBar_short.KBar(Date,cycle_duration)    ## 設定cycle_duration可以改成你想要的 KBar 週期
     for i in range(KBar_dic['time'].size):
         time = KBar_dic['time'][i]
         #prod = KBar_dic['product'][i]
