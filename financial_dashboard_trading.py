@@ -1086,4 +1086,3 @@ OrderRecord.GeneratorProfit_rateChart(StrategyName='MA')
 
 #%%
 ####### (7) 呈現即時資料 #######
-
