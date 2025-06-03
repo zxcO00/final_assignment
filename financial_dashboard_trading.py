@@ -224,7 +224,9 @@ KBar_dic = To_Dictionary_1(df, product_name)
 ###### 定義函數: 進行 K 棒更新  &  形成 KBar 字典 (新週期的): 設定cycle_duration可以改成你想要的 KBar 週期
 @st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
 def Change_Cycle(Date,cycle_duration,KBar_dic,product_name):
-    ###### 進行 K 棒更新
+    
+    KBar_obj = KBar(Date, cycle=cycle_duration)
+###### 進行 K 棒更新
     KBar = indicator_forKBar_short.KBar(Date,cycle_duration)    ## 設定cycle_duration可以改成你想要的 KBar 週期
     for i in range(KBar_dic['time'].size):
         time = KBar_dic['time'][i]
