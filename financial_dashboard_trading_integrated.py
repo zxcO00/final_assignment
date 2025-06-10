@@ -28,8 +28,8 @@ def main():
 
     @st.cache_data
     def load_data(filename):
-    df = pd.read_pickle(os.path.join(data_dir, filename))
-    return df
+        df = pd.read_pickle(os.path.join(data_dir, filename))
+        return df
 
     df = load_data(selected_file)
 
@@ -54,9 +54,9 @@ def main():
     ###### 讀取資料
     @st.cache_data
     def load_data(filename):
-    import pandas as pd
-    df = pd.read_pickle(os.path.join(data_dir, filename))
-    return df
+        import pandas as pd
+        df = pd.read_pickle(os.path.join(data_dir, filename))
+        return df
 
     df = load_data(selected_file)
     product_name = '台積電2330'
