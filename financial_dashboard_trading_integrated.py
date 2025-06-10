@@ -14,6 +14,24 @@ import numpy as np
 #import sys
 import indicator_f_Lo2_short,datetime, indicator_forKBar_short
 import pandas as pd
+
+import os
+import pandas as pd
+
+# 自動從目錄讀取所有 .pkl 檔案
+data_dir = '.'  # 或改為 'data'
+pkl_files = [f for f in os.listdir(data_dir) if f.endswith('.pkl') and f.startswith('kbars_')]
+choices = [f.replace('kbars_', '').replace('.pkl', '').replace('_', ' ') for f in pkl_files]
+selected_display = st.sidebar.selectbox("選擇商品資料檔", choices)
+selected_file = pkl_files[choices.index(selected_display)]
+
+@st.cache_data
+def load_data(filename):
+    df = pd.read_pickle(os.path.join(data_dir, filename))
+    return df
+
+df = load_data(selected_file)
+
 import streamlit as st 
 import streamlit.components.v1 as stc 
 from order_streamlit import Record
@@ -33,29 +51,6 @@ stc.html(html_temp)
 
 
 ###### 讀取資料
-@st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
-def load_data(path):
-    df = pd.read_pickle(path)
-    return df
-# ##### 讀取 excel 檔
-# df_original = pd.read_excel("kbars_2330_2022-01-01-2022-11-18.xlsx")
-
-
-###### 選擇金融商品
-st.subheader("選擇金融商品: ")
-# 
-import os
-
-# 自動從目前目錄讀取所有 kbars_ 開頭的 .pkl 檔案
-data_dir = '.'
-pkl_files = [f for f in os.listdir(data_dir) if f.endswith('.pkl') and f.startswith('kbars_')]
-
-# 轉換檔名為友善顯示
-display_names = [f.replace('kbars_', '').replace('.pkl', '').replace('_', ' ') for f in pkl_files]
-selected_display = st.sidebar.selectbox("請選擇商品", display_names)
-selected_file = pkl_files[display_names.index(selected_display)]
-
-# 載入資料
 @st.cache_data
 def load_data(filename):
     import pandas as pd
@@ -63,8 +58,6 @@ def load_data(filename):
     return df
 
 df = load_data(selected_file)
-
-    df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
     product_name = '台積電2330'
     # df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
     # df_original = load_data('kbars_2330_2022-01-01-2022-11-18.pkl')  
@@ -74,16 +67,12 @@ df = load_data(selected_file)
 # if choice == '大台指2024.12到期: 2024.1 至 2024.4.9':
 #     df_original = load_data('kbars_TXF202412_2024-01-01-2024-04-09.pkl')  
 if choice == choices[1] :                   ##'大台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    df_original = load_data('kbars_TXF202412_2023-12-21-2024-04-11.pkl')
     product_name = '大台指期貨'
 if choice == choices[2] :                              ##'小台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    df_original = load_data('kbars_MXF202412_2023-12-21-2024-04-11.pkl')
     product_name = '小台指期貨'
 if choice == choices[3] :                                           ##'英業達2020.1.2 至 2024.4.12':
-    df_original = load_data('kbars_2356_2020-01-01-2024-04-12.pkl')
     product_name = '英業達2356'
 if choice == choices[4] :                                                       ##'堤維西2020.1.2 至 2024.4.12':
-    df_original = load_data('kbars_1522_2020-01-01-2024-04-12.pkl')
     product_name = '堤維西1522'
 
 
