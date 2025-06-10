@@ -1,6 +1,3 @@
-import os
-os.environ["STREAMLIT_CONFIG_FILE"] = "streamlit_config/config.toml"
-
 # -*- coding: utf-8 -*-
 """
 金融資料視覺化看板
@@ -46,89 +43,27 @@ def load_data(path):
 
 ###### 選擇金融商品
 st.subheader("選擇金融商品: ")
-# choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指2024.12到期: 2024.1 至 2024.4.9']
-choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指期貨2024.12到期: 2023.12 至 2024.4.11', '小台指期貨2024.12到期: 2023.12 至 2024.4.11', '英業達2020.1.2 至 2024.4.12', '堤維西2020.1.2 至 2024.4.12']
-choice = st.selectbox("選擇金融商品", ["CEF：2023.04.17.2025.04.16", "CMF：2023.04.17.2025.04.17", "CQF：2023.04.17.2025.04.17", "0050：2020.01.02.2025.03.10", "00631L：2023.04.17.2025.04.17", "2330：2020.01.02.2025.04.16", "2357：2023.04.17.2025.04.16", "CBF：2023.04.17.2025.04.17", "CCF：2023.04.17.2025.04.16", "CDF：2020.03.02.2025.04.14", "MXF：2020.03.02.2025.03.14", "TXF：2020.03.23.2025.03.14", "FXF：2020.03.02.2025.04.14"])
-##### 读取Pickle文件
-if choice == "CEF：2023.04.17.2025.04.16":
-    df_original = load_data("kbars_CEF_2023-04-17-2025-04-16.pkl")
-    product_name = "CEF"
-elif choice == "CMF：2023.04.17.2025.04.17":
-    df_original = load_data("kbars_CMF_2023-04-17-2025-04-17.pkl")
-    product_name = "CMF"
-elif choice == "CQF：2023.04.17.2025.04.17":
-    df_original = load_data("kbars_CQF_2023-04-17-2025-04-17.pkl")
-    product_name = "CQF"
-elif choice == "0050：2020.01.02.2025.03.10":
-    df_original = load_data("kbars_0050_2020-01-02-2025-03-10.pkl")
-    product_name = "0050"
-elif choice == "00631L：2023.04.17.2025.04.17":
-    df_original = load_data("kbars_00631L_2023-04-17-2025-04-17.pkl")
-    product_name = "00631L"
-elif choice == "2330：2020.01.02.2025.04.16":
-    df_original = load_data("kbars_2330_2020-01-02-2025-04-16.pkl")
-    product_name = "2330"
-elif choice == "2357：2023.04.17.2025.04.16":
-    df_original = load_data("kbars_2357_2023-04-17-2025-04-16.pkl")
-    product_name = "2357"
-elif choice == "CBF：2023.04.17.2025.04.17":
-    df_original = load_data("kbars_CBF_2023-04-17-2025-04-17.pkl")
-    product_name = "CBF"
-elif choice == "CCF：2023.04.17.2025.04.16":
-    df_original = load_data("kbars_CCF_2023-04-17-2025-04-16.pkl")
-    product_name = "CCF"
-elif choice == "CDF：2020.03.02.2025.04.14":
-    df_original = load_data("kbars_CDF_2020-03-02-2025-04-14.pkl")
-    product_name = "CDF"
-elif choice == "MXF：2020.03.02.2025.03.14":
-    df_original = load_data("kbars_MXF_2020-03-02-2025-03-14.pkl")
-    product_name = "MXF"
-elif choice == "TXF：2020.03.23.2025.03.14":
-    df_original = load_data("kbars_TXF_2020-03-23-2025-03-14.pkl")
-    product_name = "TXF"
-elif choice == "FXF：2020.03.02.2025.04.14":
-    df_original = load_data("kbars_FXF_2020-03-02-2025-04-14.pkl")
-    product_name = "FXF"
-elif choice == "CEF：2023.04.17.2025.04.16":
-    df_original = load_data("kbars_CEF_2023-04-17-2025-04-16.pkl")
-    product_name = "CEF"
-elif choice == "CMF：2023.04.17.2025.04.17":
-    df_original = load_data("kbars_CMF_2023-04-17-2025-04-17.pkl")
-    product_name = "CMF"
-elif choice == "CQF：2023.04.17.2025.04.17":
-    df_original = load_data("kbars_CQF_2023-04-17-2025-04-17.pkl")
-    product_name = "CQF"
-elif choice == "0050：2020.01.02.2025.03.10":
-    df_original = load_data("kbars_0050_2020-01-02-2025-03-10.pkl")
-    product_name = "0050"
-elif choice == "00631L：2023.04.17.2025.04.17":
-    df_original = load_data("kbars_00631L_2023-04-17-2025-04-17.pkl")
-    product_name = "00631L"
-elif choice == "2330：2020.01.02.2025.04.16":
-    df_original = load_data("kbars_2330_2020-01-02-2025-04-16.pkl")
-    product_name = "2330"
-elif choice == "2357：2023.04.17.2025.04.16":
-    df_original = load_data("kbars_2357_2023-04-17-2025-04-16.pkl")
-    product_name = "2357"
-elif choice == "CBF：2023.04.17.2025.04.17":
-    df_original = load_data("kbars_CBF_2023-04-17-2025-04-17.pkl")
-    product_name = "CBF"
-elif choice == "CCF：2023.04.17.2025.04.16":
-    df_original = load_data("kbars_CCF_2023-04-17-2025-04-16.pkl")
-    product_name = "CCF"
-elif choice == "CDF：2020.03.02.2025.04.14":
-    df_original = load_data("kbars_CDF_2020-03-02-2025-04-14.pkl")
-    product_name = "CDF"
-elif choice == "MXF：2020.03.02.2025.03.14":
-    df_original = load_data("kbars_MXF_2020-03-02-2025-03-14.pkl")
-    product_name = "MXF"
-elif choice == "TXF：2020.03.23.2025.03.14":
-    df_original = load_data("kbars_TXF_2020-03-23-2025-03-14.pkl")
-    product_name = "TXF"
-elif choice == "FXF：2020.03.02.2025.04.14":
-    df_original = load_data("kbars_FXF_2020-03-02-2025-04-14.pkl")
-    product_name = "FXF"
-if choice == choices[0] :         ##'台積電: 2022.1.1 至 2024.4.9':
+# 
+import os
+
+# 自動從目前目錄讀取所有 kbars_ 開頭的 .pkl 檔案
+data_dir = '.'
+pkl_files = [f for f in os.listdir(data_dir) if f.endswith('.pkl') and f.startswith('kbars_')]
+
+# 轉換檔名為友善顯示
+display_names = [f.replace('kbars_', '').replace('.pkl', '').replace('_', ' ') for f in pkl_files]
+selected_display = st.sidebar.selectbox("請選擇商品", display_names)
+selected_file = pkl_files[display_names.index(selected_display)]
+
+# 載入資料
+@st.cache_data
+def load_data(filename):
+    import pandas as pd
+    df = pd.read_pickle(os.path.join(data_dir, filename))
+    return df
+
+df = load_data(selected_file)
+
     df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
     product_name = '台積電2330'
     # df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
@@ -173,12 +108,9 @@ if choice == choices[4] :                                                       
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-12), 區間:2020-01-02 至 2024-04-12', '2024-04-12')
 
 
-st.subheader("📆 選擇資料區間")
-start_date = st.date_input("開始日期", value=df_original["time"].min().date())
-end_date = st.date_input("結束日期", value=df_original["time"].max().date())
-start_date = datetime.datetime.combine(start_date, datetime.time.min)
-end_date = datetime.datetime.combine(end_date, datetime.time.max)
 ## 轉變為datetime object.
+start_date = datetime.datetime.strptime(start_date,'%Y-%m-%d')
+end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
 ## 使用条件筛选选择时间区间的数据
 df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
 
@@ -224,10 +156,10 @@ KBar_dic = To_Dictionary_1(df, product_name)
 ###### 定義函數: 進行 K 棒更新  &  形成 KBar 字典 (新週期的): 設定cycle_duration可以改成你想要的 KBar 週期
 @st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
 def Change_Cycle(Date,cycle_duration,KBar_dic,product_name):
-    
-    KBar_obj = KBar(Date, cycle=cycle_duration)
-###### 進行 K 棒更新
+    ###### 進行 K 棒更新
+    KBar = indicator_forKBar_short.KBar(Date,cycle_duration)    ## 設定cycle_duration可以改成你想要的 KBar 週期
     for i in range(KBar_dic['time'].size):
+        #time = datetime.datetime.strptime(KBar_dic['time'][i],'%Y%m%d%H%M%S%f')
         time = KBar_dic['time'][i]
         #prod = KBar_dic['product'][i]
         open_price= KBar_dic['open'][i]
@@ -237,7 +169,7 @@ def Change_Cycle(Date,cycle_duration,KBar_dic,product_name):
         qty =  KBar_dic['volume'][i]
         amount = KBar_dic['amount'][i]
         #tag=KBar.TimeAdd(time,price,qty,prod)
-        tag=KBar_obj.AddPrice(time, open_price, close_price, low_price, high_price, qty)
+        tag=KBar.AddPrice(time, open_price, close_price, low_price, high_price, qty)
     
     ###### 形成 KBar 字典 (新週期的):
     KBar_dic = {}
@@ -1087,3 +1019,9 @@ OrderRecord.GeneratorProfit_rateChart(StrategyName='MA')
 
 #%%
 ####### (7) 呈現即時資料 #######
+
+
+
+
+
+
